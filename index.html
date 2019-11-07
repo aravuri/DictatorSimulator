@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictator Simulator v1.0</title>
+    <link rel="stylesheet" href="DictatorsNeedToLookGoodToo.css">
+</head>
+<body>
+<h1 id="title">Dictator Simulator v1.0</h1>
+<div id="ask" class="hidden">
+    <h1 id="question">What is your name?</h1>
+    <input id="answer" type="text"><br>
+    <button id="submit" onclick="">Submit</button>
+</div>
+<div class="hidden" id="dictatorMenu">
+    <h2 id="moneyDisplay" class="inline">Money: $<span id="money"></span></h2>
+    <h2 id="populationDisplay" class="inline">Population: <span id="population"></span></h2>
+    <div class="slidecontainer">
+        Taxes: <span id="taxValue">0</span>
+        <input type="range" min="0" max="100" value="0" class="slider" id="taxes">
+    </div>
+</div>
+<div class="hidden" id="navbar">
+    <div class="yellowHover navelement menu">Electricity</div>
+    <div class="blueHover navelement menu">Water</div>
+</div>
+<div class="hidden" id="buymenu">
+    <div id="ElectricityBuy" class="buy">
+        <h2 class="yellow">Power per Day: <span id="powerperday"></span></h2>
+    </div>
+    <div id="WaterBuy" class="hidden buy">
+        <h2 class="blue">Water per Day: <span id="waterperday"></span></h2>
+    </div>
+</div>
+<script src="Dictatoring.js"></script>
+</body>
+</html>

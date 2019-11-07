@@ -1,0 +1,80 @@
+body {
+    background-color: teal;
+}
+#title {
+    text-align: center;
+    color: blue;
+    border: 2px yellow solid;
+    padding: 1%;
+    background-color: ghostwhite;
+}
+#navbar {
+    width: 25%;
+    height: 75%;
+    overflow: scroll;
+    padding: 2%;
+    display: inline-block;
+}
+.navelement {
+    color: black;
+    padding: 30px;
+    border-radius: 20px;
+    font-size: 25px;
+    width: 90%;
+    text-align: center;
+}
+.yellowHover:hover {
+    background-color: yellow;
+}
+.blueHover:hover {
+    background-color: deepskyblue;
+}
+.blue {
+    color: deepskyblue;
+}
+.yellow {
+    color: yellow;
+}
+.hidden {
+    visibility: hidden;
+}
+#ask {
+    position: absolute;
+    background-color: sandybrown;
+    text-align: center;
+    width: 400px;
+    height: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px saddlebrown;
+    margin-left: 35%;
+    margin-right: auto;
+    overflow: auto;
+}
+#buymenu {
+    overflow: scroll;
+    padding: 50px 50px 50px 50px;
+    width: 65%;
+    height: 75%;
+    display: inline-block;
+    position: absolute;
+}
+.buy {
+    position: absolute;
+}
+.menu {
+    margin-top: 10px;
+    cursor: pointer;
+    user-select: none;
+    background-color: lightgrey;
+}
+#moneyDisplay {
+    color: lawngreen;
+}
+#populationDisplay {
+    margin-left: 40px;
+    color: navajowhite;
+}
+.inline {
+    display: inline;
+}

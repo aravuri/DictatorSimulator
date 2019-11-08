@@ -4,34 +4,64 @@
     <meta charset="UTF-8">
     <title>Dictator Simulator v1.0</title>
     <link rel="stylesheet" href="DictatorsNeedToLookGoodToo.css">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
 </head>
-<body>
-<h1 id="title">Dictator Simulator v1.0</h1>
-<div id="ask" class="hidden">
-    <h1 id="question">What is your name?</h1>
-    <input id="answer" type="text"><br>
-    <button id="submit" onclick="">Submit</button>
+<body class="body-css">
+<div class="title-div">
+    <h1 class="display-3" id="title">Dictator Simulator v1.0</h1>
 </div>
-<div class="hidden" id="dictatorMenu">
-    <h2 id="moneyDisplay" class="inline">Money: $<span id="money"></span></h2>
-    <h2 id="populationDisplay" class="inline">Population: <span id="population"></span></h2>
-    <div class="slidecontainer">
-        Taxes: <span id="taxValue">0</span>
-        <input type="range" min="0" max="100" value="0" class="slider" id="taxes">
+
+<hr>
+<div class="ask-div hidden" id="ask">
+    <h2 id="question">What is your name?</h2>
+    <input class="form-control" id="answer" type="text">
+    <p></p>
+    <button class="btn btn-primary btn-lg" id="submit" onclick="">Submit</button>
+</div>
+<div class="row pad-left">
+    <div class="col-sm-2 nav-group hidden btn-group-vertical" id="navbar">
+        <button class="btn btn-primary" type="button">Water</button>
+        <button class="btn btn-warning" type="button">Electricity</button>
+        <button class="btn btn-success" type="button">Food</button>
+        <button class="btn btn-secondary" type="button">Shelter</button>
+        <button class="btn btn-danger" type="button">Gas</button>
+        <button class="btn btn-dark" type="button">Internet</button>
     </div>
-</div>
-<div class="hidden" id="navbar">
-    <div class="yellowHover navelement menu">Electricity</div>
-    <div class="blueHover navelement menu">Water</div>
-</div>
-<div class="hidden" id="buymenu">
-    <div id="ElectricityBuy" class="buy">
-        <h2 class="yellow">Power per Day: <span id="powerperday"></span></h2>
-    </div>
-    <div id="WaterBuy" class="hidden buy">
-        <h2 class="blue">Water per Day: <span id="waterperday"></span></h2>
+    <div class="col-sm-10">
+        <div class="buy-div hidden" id="dictatorMenu" style="margin-top: 0!important;">
+            <div class="row">
+                <div class="col center-contents">
+                    <h4 id="moneyDisplay">Money: $<span id="money"></span></h4>
+                </div>
+                <div class="col center-contents">
+                    <h4>Taxes: <span id="taxValue">0</span>%<br/></h4>
+                </div>
+                <div class="col center-contents">
+                    <h4 id="populationDisplay">Population: <span id="population"></span></h4>
+                </div>
+            </div>
+            <input class="custom-range" id="taxes" max="100" min="0" type="range" value="0">
+        </div>
+
+        <div class="buy-div hidden" id="buymenu">
+            <div id="ElectricityBuy">
+                <h4>Power per Day: <span id="powerperday"></span></h4>
+            </div>
+            <div id="WaterBuy">
+                <h4>Water per Day: <span id="waterperday"></span></h4>
+            </div>
+        </div>
     </div>
 </div>
 <script src="Dictatoring.js"></script>
+
+<script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>

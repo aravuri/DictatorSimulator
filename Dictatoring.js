@@ -2,6 +2,9 @@ function clearCookie() {
     document.cookie = "name=";
     document.cookie = "place=";
 }
+
+clearCookie();
+
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -17,6 +20,7 @@ function getCookie(cname) {
     }
     return "";
 }
+
 var name, place;
 var ask = document.getElementById("ask");
 var question = document.getElementById("question");
@@ -46,12 +50,14 @@ var powerPerDayText = document.getElementById("powerperday");
 var waterPerDay = 0;
 var waterPerDayText = document.getElementById("waterperday");
 console.log(document.cookie);
+
 function askName() {
     ask.classList.remove("hidden");
     question.textContent = "What is your name?";
     submit.onclick = gotName;
     console.log("ask name");
 }
+
 function gotName() {
     name = answer.value;
     document.cookie = "name=" + name;
@@ -69,7 +75,7 @@ function gotName() {
 }
 function askPlace() {
     ask.classList.remove("hidden");
-    question.textContent = "What is the name of your country";
+    question.textContent = "What is the name of your country?";
     submit.onclick = gotPlace;
     console.log("ask place");
 }

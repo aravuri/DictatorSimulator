@@ -21,12 +21,18 @@
     width: 100%
 }
 
+.nav-group {
+    padding: 1rem;
+    background-color: lightskyblue;
+    border-radius: 1rem;
+}
+
 .buy-div {
     border-radius: 1rem;
     padding: 1rem;
     width: 95%;
     margin: 1rem;
-    background-color: aqua;
+    background-color: lightskyblue;
 }
 
 .pad-left {
@@ -34,8 +40,11 @@
 }
 
 .body-css {
-    background-color: deeppink;
-/ / TODO: Change me !
+    background-color: #de0000;
+    background-image: url("img/soviet.jpeg");
+    background-size: cover; /* <------ */
+    background-repeat: no-repeat;
+    /*background-position: center center;              !* optional, center the image *!*/
 }
 
 .title-div {
@@ -43,8 +52,9 @@
     margin-top: 2.5rem;
     text-align: center;
     border-radius: 2.5rem;
-    background-color: aquamarine;
-/ / TODO: Change me ! height: 90 %;
+    background-color: darkblue;
+    color: white;
+    height: 90%;
     width: 90%;
     border: solid black 0.125rem;
 }
@@ -56,6 +66,5 @@
     text-align: center;
     width: 50%;
     padding: 1rem;
-    background-color: #b8b8b8;
-/ / TODO: Change me !
+    background-color: lightskyblue;
 }

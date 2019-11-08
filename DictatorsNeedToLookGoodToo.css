@@ -1,80 +1,61 @@
-body {
-    background-color: teal;
-}
-#title {
-    text-align: center;
-    color: blue;
-    border: 2px yellow solid;
-    padding: 1%;
-    background-color: ghostwhite;
-}
-#navbar {
-    width: 25%;
-    height: 75%;
-    overflow: scroll;
-    padding: 2%;
-    display: inline-block;
-}
-.navelement {
-    color: black;
-    padding: 30px;
-    border-radius: 20px;
-    font-size: 25px;
-    width: 90%;
-    text-align: center;
-}
-.yellowHover:hover {
-    background-color: yellow;
-}
-.blueHover:hover {
-    background-color: deepskyblue;
-}
-.blue {
-    color: deepskyblue;
-}
-.yellow {
-    color: yellow;
-}
 .hidden {
     visibility: hidden;
+    display: none;
 }
-#ask {
-    position: absolute;
-    background-color: sandybrown;
+
+.nav-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+}
+
+.center-contents {
     text-align: center;
-    width: 400px;
-    height: 150px;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px saddlebrown;
-    margin-left: 35%;
-    margin-right: auto;
-    overflow: auto;
+    align-content: center;
+    align-items: center;
+    align-self: center;
 }
-#buymenu {
-    overflow: scroll;
-    padding: 50px 50px 50px 50px;
-    width: 65%;
-    height: 75%;
-    display: inline-block;
-    position: absolute;
+
+.other-wrapper {
+    width: 100%
 }
-.buy {
-    position: absolute;
+
+.buy-div {
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 95%;
+    margin: 1rem;
+    background-color: aqua;
 }
-.menu {
-    margin-top: 10px;
-    cursor: pointer;
-    user-select: none;
-    background-color: lightgrey;
+
+.pad-left {
+    padding-left: 2rem;
 }
-#moneyDisplay {
-    color: lawngreen;
+
+.body-css {
+    background-color: deeppink;
+/ / TODO: Change me !
 }
-#populationDisplay {
-    margin-left: 40px;
-    color: navajowhite;
+
+.title-div {
+    margin: auto;
+    margin-top: 2.5rem;
+    text-align: center;
+    border-radius: 2.5rem;
+    background-color: aquamarine;
+/ / TODO: Change me ! height: 90 %;
+    width: 90%;
+    border: solid black 0.125rem;
 }
-.inline {
-    display: inline;
+
+.ask-div {
+    border-radius: 1rem;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    width: 50%;
+    padding: 1rem;
+    background-color: #b8b8b8;
+/ / TODO: Change me !
 }

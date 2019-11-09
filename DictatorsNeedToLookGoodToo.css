@@ -41,7 +41,7 @@
 
 .body-css {
     background-color: #de0000;
-    background-image: url("img/soviet.jpeg");
+/*     background-image: url("img/soviet.jpeg"); */
     background-size: cover; /* <------ */
     background-repeat: no-repeat;
     /*background-position: center center;              !* optional, center the image *!*/

@@ -60,6 +60,7 @@ function askName() {
 
 function gotName() {
     name = answer.value;
+    answer.value = '';
     document.cookie = "name=" + name;
     console.log(name);
     ask.classList.add("hidden");
@@ -71,7 +72,6 @@ function gotName() {
         startGame();
     }
     console.log("got name");
-
 }
 function askPlace() {
     ask.classList.remove("hidden");
@@ -81,6 +81,7 @@ function askPlace() {
 }
 function gotPlace() {
     place = answer.value;
+    answer.value = '';
     document.cookie = "place=" + place;
     console.log(place);
     ask.classList.add("hidden");

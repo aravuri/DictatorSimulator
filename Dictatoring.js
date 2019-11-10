@@ -3,7 +3,33 @@ function clearCookie() {
     document.cookie = "place=";
 }
 
-clearCookie();
+// clearCookie();
+var unshrinkify = function (x) {
+    x = x + "";
+    var c = x.charAt(x.length - 1);
+    if (c === "T") {
+        return parseFloat(x.substring(0, x.length - 1))*1000000000000;
+    } else if (c === "B") {
+        return parseFloat(x.substring(0, x.length - 1))*1000000000;
+    } else if (c === "M") {
+        return parseFloat(x.substring(0, x.length - 1))*1000000;
+    } else if (c === "K") {
+        return parseFloat(x.substring(0, x.length - 1))*1000;
+    }
+    return parseFloat(x);
+};
+var shrinkify = function (x) {
+    if (Math.abs(x) / 1000000000000 >= 1) {
+        return Math.round(x/1000000000)/1000 + "T";
+    } else if (Math.abs(x) / 1000000000 >= 1) {
+        return Math.round(x/1000000)/1000 + "B";
+    } else if (Math.abs(x) / 1000000 >= 1) {
+        return Math.round(x/1000)/1000 + "M";
+    } else if (Math.abs(x) / 1000 >= 1) {
+        return Math.round(x)/1000 + "K";
+    }
+    return x;
+};
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -20,7 +46,7 @@ function getCookie(cname) {
     }
     return "";
 }
-
+var birthrate = 0.0189;
 var name, place;
 var ask = document.getElementById("ask");
 var question = document.getElementById("question");
@@ -49,6 +75,8 @@ var powerPerDay = 0;
 var powerPerDayText = document.getElementById("powerperday");
 var waterPerDay = 0;
 var waterPerDayText = document.getElementById("waterperday");
+var averageWages = 120;
+var averageMoney = 500000;
 console.log(document.cookie);
 answer.addEventListener("keyup", function(event) {
     // Number 13 is the "Enter" key on the keyboard
@@ -128,10 +156,23 @@ if (getCookie("name").length === 0) {
     }
 }
 function update() {
+    averageMoney += averageWages;
+    let change = averageMoney*taxes;
+    mps = Math.floor(change*population);
+    averageMoney -= change;
+    averageMoney = Math.max(0, averageMoney);
+    pps = 0;
+    for (let i = 0; i < population; i++) {
+        let x = Math.random();
+        if (x <= birthrate) {
+            console.log(x);
+            pps++;
+        }
+    }
     money += mps;
     population += pps;
-    moneyText.textContent = money;
-    populationText.textContent = population;
-    powerPerDayText.textContent = powerPerDay;
-    waterPerDayText.textContent = waterPerDay;
+    moneyText.textContent = shrinkify(money);
+    populationText.textContent = shrinkify(population);
+    powerPerDayText.textContent = shrinkify(powerPerDay);
+    waterPerDayText.textContent = shrinkify(waterPerDay);
 }

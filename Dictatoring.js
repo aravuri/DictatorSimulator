@@ -3,7 +3,7 @@ function clearCookie() {
     document.cookie = "place=";
 }
 
-// clearCookie();
+clearCookie();
 var unshrinkify = function (x) {
     x = x + "";
     var c = x.charAt(x.length - 1);

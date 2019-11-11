@@ -79,11 +79,8 @@ var averageWages = 120;
 var averageMoney = 500000;
 console.log(document.cookie);
 answer.addEventListener("keyup", function(event) {
-    // Number 13 is the "Enter" key on the keyboard
     if (event.key.toLowerCase() === "enter") {
-        // Cancel the default action, if needed
         event.preventDefault();
-        // Trigger the button element with a click
         submit.click();
     }
 });

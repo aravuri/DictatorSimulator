@@ -3,7 +3,7 @@ function clearCookie() {
     document.cookie = "place=";
 }
 
-clearCookie();
+// clearCookie();
 var unshrinkify = function (x) {
     x = x + "";
     var c = x.charAt(x.length - 1);
@@ -124,6 +124,7 @@ function gotPlace() {
     startGame();
 }
 function startGame() {
+    taxSlider.value = 0;
     navbar.classList.remove("hidden");
     buyMenu.classList.remove("hidden");
     dictatorMenu.classList.remove("hidden");
@@ -157,7 +158,7 @@ function update() {
     let change = averageMoney*taxes;
     mps = Math.floor(change*population);
     averageMoney -= change;
-    averageMoney = Math.max(0, averageMoney);
+    averageMoney = Math.max(0, averageMoney);2
     pps = 0;
     for (let i = 0; i < population; i++) {
         let x = Math.random();

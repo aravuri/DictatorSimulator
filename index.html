@@ -9,7 +9,7 @@
 </head>
 <body class="body-css">
 <div class="title-div">
-    <h1 class="display-3" id="title">Dictator Simulator v1.0</h1>
+    <h1 class="display-3" id="title">Dictator Simulator ALPHA</h1>
 </div>
 
 <hr>
@@ -21,12 +21,12 @@
 </div>
 <div class="row pad-left">
     <div class="col-sm-2 nav-group hidden btn-group-vertical" id="navbar">
-        <button class="btn btn-primary" type="button">Water</button>
-        <button class="btn btn-warning" type="button">Electricity</button>
-        <button class="btn btn-success" type="button">Food</button>
-        <button class="btn btn-secondary" type="button">Shelter</button>
-        <button class="btn btn-danger" type="button">Gas</button>
-        <button class="btn btn-dark" type="button">Internet</button>
+        <button class="btn btn-primary menu" type="button">Water</button>
+        <button class="btn btn-warning menu" type="button">Electricity</button>
+        <button class="btn btn-success menu" type="button">Food</button>
+        <button class="btn btn-secondary menu" type="button">Shelter</button>
+        <button class="btn btn-danger menu" type="button">Gas</button>
+        <button class="btn btn-dark menu" type="button">Internet</button>
     </div>
     <div class="col-sm-10">
         <div class="buy-div hidden" id="dictatorMenu" style="margin-top: 0!important;">
@@ -45,11 +45,19 @@
         </div>
 
         <div class="buy-div hidden" id="buymenu">
-            <div id="ElectricityBuy">
-                <h4>Power per Day: <span id="powerperday"></span></h4>
-            </div>
             <div id="WaterBuy">
                 <h4>Water per Day: <span id="waterperday"></span></h4>
+            </div>
+            <div class="hidden" id="ElectricityBuy">
+                <h4>Power per Day: <span id="powerperday"></span></h4>
+            </div>
+            <div class="hidden" id="FoodBuy">
+            </div>
+            <div class="hidden" id="ShelterBuy">
+            </div>
+            <div class="hidden" id="GasBuy">
+            </div>
+            <div class="hidden" id="InternetBuy">
             </div>
         </div>
     </div>

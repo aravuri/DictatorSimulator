@@ -10,6 +10,9 @@ const moneyText = document.getElementById("money");
 const populationText = document.getElementById("population");
 const taxValue = document.getElementById("taxValue");
 const taxSlider = document.getElementById("taxes");
+const waterPerDayText = document.getElementById("waterperday");
+const menus = document.getElementsByClassName("menu");
+const powerPerDayText = document.getElementById("powerperday");
 let money = 3000000000;
 let birthrate = 0.00002082191;
 let name, place;
@@ -18,13 +21,10 @@ let taxes = 0;
 let days = 0;
 let pps = 0;
 let mps = 0;
-let menus = document.getElementsByClassName("menu");
 let currmenu = menus[0];
 let powerPerDay = 0;
-let powerPerDayText = document.getElementById("powerperday");
 let waterPerDay = 0;
-let waterPerDayText = document.getElementById("waterperday");
-let averageWages = 68815.9090909091;
+let averageWages = 68815.9090909091/365;
 let averageMoney = 114457.142857143;
 
 
@@ -88,7 +88,6 @@ let shrinkify = function (x) {
 };
 log(document.cookie);
 
-taxes = taxSlider.value;
 taxSlider.oninput = function() {
     taxes = this.value;
     taxValue.textContent = taxes;
@@ -143,7 +142,9 @@ function gotPlace() {
 }
 
 function startGame() {
-    taxSlider.value = 0;
+    taxSlider.value = 16;
+    taxes = taxSlider.value;
+    taxValue.textContent = taxes;
     navbar.classList.remove("hidden");
     buyMenu.classList.remove("hidden");
     dictatorMenu.classList.remove("hidden");

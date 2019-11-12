@@ -176,7 +176,7 @@ var years = 0;
 
 function update() {  // Assuming that each update is a year
     averageMoney += averageWages;
-    let change = averageMoney * taxes;
+    let change = averageWages * (taxes / 100.0);  // People are taxed by income, not by the amount of money they have
 
     mps = Math.floor(change * population);
     averageMoney -= change;

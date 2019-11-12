@@ -1,0 +1,42 @@
+World Population: ~7,750,000,000
+Population Gain per Day: ~175,000
+    - 0.0002258064516
+
+In 2011: 19 births/1,000 population  | 8 deaths/1,000 population
+         - 11 gained / 1k population = 0.011 per year? 0.0000301369863 per day???
+
+Sources:
+http://www.ecology.com/birth-death-rates/
+https://www.worldometers.info/world-population/
+
+
+====================================== https://en.wikipedia.org/wiki/Population_growth ======================================
+- World population grows 30% in 20 years (1990 - 2010)
+      - From 1990-2010: 0.00004109589041 per day, 0.0012500 per month, 0.01500 per year
+- US population grows 22.5% in 20 years (1990 - 2010), and now grows 6.08% in 8 years (2010 - 2018)
+      - From 1990-2010: 0.00003082191781 per day, 0.0009375 per month, 0.01125 per year
+      - From 2010-2018: 0.00002082191781 per day, 0.0006333 per month, 0.00760 per year
+
+============================== https://en.wikipedia.org/wiki/List_of_countries_by_average_wage ==============================
+- US average wages (after taxes, 2017, PPP): $165.9123287671 per day, $5,046.5 per month, $60,558 per year.
+     - Wages (assuming working 10 hours a day): $16.5912328767 per hour
+     - Assume 12% tax: $68,815.9090909091 per year
+
+ ====================== https://www.thebalance.com/american-net-worth-by-state-metropolitan-4135839 ======================
+ - US average net worths:
+    (LESS THAN 35): $6,676
+    (35-44): $35,000
+    (45-54): $84,542
+    (55-64): $143,964
+    (65-69): $194,226
+    (70-74): $181,078
+    (MORE THAN 75): $155,714
+
+    - OVERALL AVERAGE: $114,457.142857143
+
+
+===================== US POPULATION ===============
+https://en.wikipedia.org/wiki/Demographics_of_the_United_States
+ - Latest Estimate: 329,968,629
+
+STARTING FIND: 3 TRILLION

@@ -1,3 +1,33 @@
+const ask = document.getElementById("ask");
+const question = document.getElementById("question");
+const daycounter = document.getElementById("day-counter");
+const answer = document.getElementById("answer");
+const submit = document.getElementById("submit");
+const navbar = document.getElementById("navbar");
+const buyMenu = document.getElementById("buymenu");
+const dictatorMenu = document.getElementById("dictatorMenu");
+const moneyText = document.getElementById("money");
+const populationText = document.getElementById("population");
+const taxValue = document.getElementById("taxValue");
+const taxSlider = document.getElementById("taxes");
+let money = 3000000000;
+let birthrate = 0.00002082191;
+let name, place;
+let population = 329968629;
+let taxes = 0;
+let days = 0;
+let pps = 0;
+let mps = 0;
+let menus = document.getElementsByClassName("menu");
+let currmenu = menus[0];
+let powerPerDay = 0;
+let powerPerDayText = document.getElementById("powerperday");
+let waterPerDay = 0;
+let waterPerDayText = document.getElementById("waterperday");
+let averageWages = 68815.9090909091;
+let averageMoney = 114457.142857143;
+
+
 let log = function (X) {
     console.log(X);
 };
@@ -8,15 +38,15 @@ function clearCookie() {
 }
 
 function rand(min, max) {
-    return Math.random() * (max - min + 1) + min;
+    return Math.random() * (max - min) + min;
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
         while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
@@ -29,9 +59,9 @@ function getCookie(cname) {
 
 // clearCookie();
 
-var unshrinkify = function (x) {
+let unshrinkify = function (x) {
     x = x + "";
-    var c = x.charAt(x.length - 1);
+    let c = x.charAt(x.length - 1);
     if (c === "T") {
         return parseFloat(x.substring(0, x.length - 1))*1000000000000;
     } else if (c === "B") {
@@ -44,7 +74,7 @@ var unshrinkify = function (x) {
     return parseFloat(x);
 };
 
-var shrinkify = function (x) {
+let shrinkify = function (x) {
     if (Math.abs(x) / 1000000000000 >= 1) {
         return Math.round(x/1000000000)/1000 + "T";
     } else if (Math.abs(x) / 1000000000 >= 1) {
@@ -56,42 +86,13 @@ var shrinkify = function (x) {
     }
     return x;
 };
-
-var birthrate = 0.00760;
-var name, place;
-var ask = document.getElementById("ask");
-var question = document.getElementById("question");
-var yearcounter = document.getElementById("year-counter");
-var answer = document.getElementById("answer");
-var submit = document.getElementById("submit");
-var navbar = document.getElementById("navbar");
-var buyMenu = document.getElementById("buymenu");
-var dictatorMenu = document.getElementById("dictatorMenu");
-var money = 3000000000000;
-var moneyText = document.getElementById("money");
-var population = 329968629;
-var populationText = document.getElementById("population");
-var taxValue = document.getElementById("taxValue");
-var taxSlider = document.getElementById("taxes");
-var taxes = 0;
+log(document.cookie);
 
 taxes = taxSlider.value;
 taxSlider.oninput = function() {
     taxes = this.value;
     taxValue.textContent = taxes;
 };
-
-var pps = 0;
-var mps = 0;
-var menus = document.getElementsByClassName("menu");
-var currmenu = menus[0];
-var powerPerDay = 0;
-var powerPerDayText = document.getElementById("powerperday");
-var waterPerDay = 0;
-var waterPerDayText = document.getElementById("waterperday");
-var averageWages = 68815.9090909091;
-var averageMoney = 114457.142857143;  // Is this the average money owned by each person?
-log(document.cookie);
 
 answer.addEventListener("keyup", function(event) {
     if (event.key.toLowerCase() === "enter") {
@@ -172,9 +173,7 @@ if (getCookie("name").length === 0) {
     }
 }
 
-var years = 0;
-
-function update() {  // Assuming that each update is a year
+function update() {  // Assuming that each update is a day
     averageMoney += averageWages;
     let change = averageWages * (taxes / 100.0);  // People are taxed by income, not by the amount of money they have
 
@@ -191,6 +190,6 @@ function update() {  // Assuming that each update is a year
     powerPerDayText.textContent = shrinkify(powerPerDay);
     waterPerDayText.textContent = shrinkify(waterPerDay);
 
-    years++;
-    yearcounter.textContent = years;
+    days++;
+    daycounter.textContent = days;
 }

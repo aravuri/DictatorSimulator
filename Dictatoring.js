@@ -21,11 +21,14 @@ let taxes = 0;
 let days = 0;
 let pps = 0;
 let mps = 0;
+let temperature = 22; //Imperial Scum.
+let pollution = 0;
 let currmenu = menus[0];
 let powerPerDay = 0;
 let waterPerDay = 0;
 let averageWages = 68815.9090909091/365;
 let averageMoney = 114457.142857143;
+let averageExpenses = 164.55;
 
 
 let log = function (X) {
@@ -152,6 +155,8 @@ function startGame() {
     setInterval(update, 1000);
 }
 for (let i = 0; i < menus.length; i++) {
+    // what can i say except you're welcome. For the wonderful world you know. I say it's okay it's okay you're welcome.
+    // But i'm gonna need that boat. I'm sailing away, away you're welcome. YOU'RE WELCOME. AND THANK YOU!!!!!!!!!!!!!!
     menus[i].addEventListener('click', function () {
         document.getElementById(currmenu.textContent + "Buy").classList.add("hidden");
         log(currmenu);
@@ -175,7 +180,7 @@ if (getCookie("name").length === 0) {
 }
 
 function update() {  // Assuming that each update is a day
-    averageMoney += averageWages;
+    averageMoney += averageWages - averageExpenses;
     let change = averageWages * (taxes / 100.0);  // People are taxed by income, not by the amount of money they have
 
     mps = Math.floor(change * population);

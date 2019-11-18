@@ -29,11 +29,19 @@ let waterPerDay = 0;
 let averageWages = 68815.9090909091/365;
 let averageMoney = 114457.142857143;
 let averageExpenses = 164.55;
-let landLength = 50;
+let landLength = 51;
 let land = [];
 for (let i = 0; i < landLength; i++) {
     land.push([]);
 }
+
+for (let i = 0; i < landLength; i++) {
+    for (let j = 0; j < landLength; j++) {
+        land[i].push(0);
+    }
+}
+
+land[26][26] = 1;
 
 let log = function (X) {
     console.log(X);

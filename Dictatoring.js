@@ -29,7 +29,11 @@ let waterPerDay = 0;
 let averageWages = 68815.9090909091/365;
 let averageMoney = 114457.142857143;
 let averageExpenses = 164.55;
-
+let landLength = 50;
+let land = [];
+for (let i = 0; i < landLength; i++) {
+    land.push([]);
+}
 
 let log = function (X) {
     console.log(X);
@@ -155,8 +159,6 @@ function startGame() {
     setInterval(update, 1000);
 }
 for (let i = 0; i < menus.length; i++) {
-    // what can i say except you're welcome. For the wonderful world you know. I say it's okay it's okay you're welcome.
-    // But i'm gonna need that boat. I'm sailing away, away you're welcome. YOU'RE WELCOME. AND THANK YOU!!!!!!!!!!!!!!
     menus[i].addEventListener('click', function () {
         document.getElementById(currmenu.textContent + "Buy").classList.add("hidden");
         log(currmenu);

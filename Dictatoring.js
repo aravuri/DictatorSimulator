@@ -13,6 +13,8 @@ const taxSlider = document.getElementById("taxes");
 const waterPerDayText = document.getElementById("waterperday");
 const menus = document.getElementsByClassName("menu");
 const powerPerDayText = document.getElementById("powerperday");
+const landDisplay = document.getElementById("landDisplay");
+const landLength = 101;
 let money = 3000000000;
 let birthrate = 0.00002082191;
 let name, place;
@@ -29,8 +31,26 @@ let waterPerDay = 0;
 let averageWages = 68815.9090909091/365;
 let averageMoney = 114457.142857143;
 let averageExpenses = 164.55;
-let landLength = 51;
 let land = [];
+let landColors = {
+    0: "fill: rgb(0, 0, 0)", //Undiscovered
+    1: "fill: rgb(51, 204, 51)", //Grassland
+    2: "", //Mountain
+    3: "", //Lake
+    4: "", //Ocean
+    5: "", //Beach
+    6: "", //Desert
+    7: "", //Volcano
+    8: "", //Hills
+    9: "", //Swamp
+    10: "", //Jungle
+    11: "", //Tundra
+    12: "", //Savanna
+    13: "", //Taiga
+    14: "", //Forest
+    15: "" //Ice Plains
+};
+
 for (let i = 0; i < landLength; i++) {
     land.push([]);
 }
@@ -41,7 +61,21 @@ for (let i = 0; i < landLength; i++) {
     }
 }
 
-land[26][26] = 1;
+for (let i = 0; i < landLength; i++) {
+    for (let j = 0; j < landLength; j++) {
+        let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        rect.id = i + "-" + j + "-rect";
+        rect.classList.add(i + "-row");
+        rect.classList.add(j + "-col");
+        rect.setAttributeNS(null, 'x', j * 1010 / landLength);
+        rect.setAttributeNS(null, 'y', i * 1010 / landLength);
+        rect.setAttributeNS(null, 'height', '' + 1010 / landLength);
+        rect.setAttributeNS(null, 'width', '' + 1010 / landLength);
+        landDisplay.appendChild(rect)
+    }
+}
+
+land[Math.ceil(landLength / 2)][Math.ceil(landLength / 2)] = 1;
 
 let log = function (X) {
     console.log(X);
@@ -205,6 +239,12 @@ function update() {  // Assuming that each update is a day
     populationText.textContent = shrinkify(population);
     powerPerDayText.textContent = shrinkify(powerPerDay);
     waterPerDayText.textContent = shrinkify(waterPerDay);
+
+    for (let i = 0; i < landLength; i++) {
+        for (let j = 0; j < landLength; j++) {
+            document.getElementById(i + "-" + j + "-rect").setAttributeNS(null, 'style', landColors[land[i][j]]);
+        }
+    }
 
     days++;
     daycounter.textContent = days;

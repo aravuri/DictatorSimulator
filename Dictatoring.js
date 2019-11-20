@@ -35,20 +35,19 @@ let land = [];
 let landColors = {
     0: "fill: rgb(0, 0, 0)", //Undiscovered
     1: "fill: rgb(51, 204, 51)", //Grassland
-    2: "", //Mountain
-    3: "", //Lake
-    4: "", //Ocean
-    5: "", //Beach
-    6: "", //Desert
-    7: "", //Volcano
-    8: "", //Hills
-    9: "", //Swamp
-    10: "", //Jungle
-    11: "", //Tundra
-    12: "", //Savanna
-    13: "", //Taiga
-    14: "", //Forest
-    15: "" //Ice Plains
+    2: "fill: rgb(102, 102, 153)", //Mountain
+    3: "fill: rgb(0, 204, 255)", //Lake
+    4: "fill: rgb(51, 204, 204)", //Ocean
+    5: "fill: rgb(255, 204, 0)", //Beach
+    6: "fill: rgb(255, 255, 0)", //Desert
+    7: "fill: rgb(128, 0, 0)", //Volcano
+    8: "fill: rgb(51, 204, 51)", //Hills
+    9: "fill: rgb(51, 102, 0)", //Swamp
+    10: "fill: rgb(0, 102, 0)", //Jungle
+    11: "fill: rgb(204, 255, 255)", //Ice Plains
+    12: "fill: rgb(204, 153, 0)", //Savanna
+    13: "fill: rgb(204, 255, 255)", //Taiga
+    14: "fill: rgb(51, 204, 51)" //Forest
 };
 
 for (let i = 0; i < landLength; i++) {

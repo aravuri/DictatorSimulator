@@ -100,6 +100,20 @@ class PriorityQueue {
         }
     }
 }
+
+function fast(a, b) {
+    if (a[4] === b[4]) {
+        return a[3] - b[3];
+    }
+    return a[4] - b[4];
+}
+
+function careful(a, b) {
+    if (a[3] === b[3]) {
+        return a[4] - b[4];
+    }
+    return a[3] - b[3];
+}
 const ask = document.getElementById("ask");
 const question = document.getElementById("question");
 const daycounter = document.getElementById("day-counter");
@@ -137,6 +151,23 @@ let averageMoney = 114457.142857143;
 let averageExpenses = 164.55;
 let land = [];
 let realLand = [];
+let landIDtoName = {
+    0: "Undiscovered",
+    1: "Grassland",
+    2: "Mountain",
+    3: "Lake",
+    4: "Ocean",
+    5: "Beach",
+    6: "Desert",
+    7: "Volcano",
+    8: "Hills",
+    9: "Swamp",
+    10: "Jungle",
+    11: "Ice Plains",
+    12: "Savanna",
+    13: "Taiga",
+    14: "Forest"
+};
 let landColors = {
     0: "fill: rgb(0, 0, 0)", //Undiscovered
     1: "fill: rgb(51, 204, 51)", //Grassland
@@ -196,15 +227,14 @@ for (let i = 0; i < landLength; i++) {
         rect.onclick = function () {
             let x = confirm("Do you want to launch an expedition?");
             if (!x) {
-                log("what");
                 return;
             }
-            log("ok let's start");
+            let beCareful = confirm("Will this explorer be careful or fast? Careful=OK, Fast=Cancel");
             explorers++;
             explorersDisplay.textContent = explorers;
-            let bfs = new PriorityQueue({comparator: (a, b) => a[3] - b[3]});
+            let bfs = new PriorityQueue({comparator: beCareful ? careful : fast});
             let visited = land.map((x) => new Array(x.length).fill(false));
-            bfs.push([Math.ceil(landLength / 2), Math.ceil(landLength / 2), [], 0]);
+            bfs.push([Math.ceil(landLength / 2), Math.ceil(landLength / 2), [], 0, 0]);
             log(bfs.size());
             while (bfs.size() > 0) {
                 let state = bfs.poll();
@@ -212,19 +242,20 @@ for (let i = 0; i < landLength; i++) {
                 let x = state[1];
                 let exploredLands = state[2];
                 let danger = state[3];
+                let time = state[4];
                 if (visited[y][x]) {
                     continue;
                 }
                 let thing = JSON.parse(JSON.stringify(exploredLands));
                 thing.push([y, x]);
                 visited[y][x] = true;
-                log(x + " " + y + " " + danger + " " + exploredLands.toString());
+                log(x + ", " + y + ", " + danger + ", " + time);
                 if (y === i && x === j) {
                     let k = 0;
                     let time = 0;
                     let dead = false;
                     for (k = 0; k < thing.length; k++) {
-                        time += land[i][j] === 0 ? landData[realLand[thing[k][0]][thing[k][1]]].time : landData[realLand[thing[k][0]][thing[k][1]]].time / 4;
+                        time += land[i][j] === 0 ? landData[realLand[thing[k][0]][thing[k][1]]].time : 0;
                         if (land[i][j] === 0 && Math.random() < landData[realLand[thing[k][0]][thing[k][1]]].difficulty) {
                             dead = true;
                             break;
@@ -236,29 +267,35 @@ for (let i = 0; i < landLength; i++) {
                             explorers--;
                             population--;
                             alert("Your explorer died. Sorry.")
-                        }, time * 1000)
+                        }, time * /*1000*/ 1)
                     } else {
                         setTimeout(function () {
                             for (k = 0; k < thing.length; k++) {
                                 land[thing[k][0]][thing[k][1]] = realLand[thing[k][0]][thing[k][1]];
+                                let yes = document.getElementById(thing[k][0] + "-" + thing[k][1] + "-rect");
+                                let yYes = thing[k][0];
+                                let xYes = thing[k][1];
+                                yes.onclick = function () {
+                                    alert("This is a " + landIDtoName[land[yYes][xYes]]);
+                                };
                             }
                             explorers--;
                             alert("Your explorer discovered things!")
-                        }, time * 2 * 1000);
+                        }, time * 2 * /*1000*/ 1);
                     }
                     return;
                 }
                 if (y - 1 >= 0 && !visited[y - 1][x]) {
-                    bfs.push([y - 1, x, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y - 1][x] === 0 ? landData[realLand[y - 1][x]].difficulty : 0)))]);
+                    bfs.push([y - 1, x, JSON.parse(JSON.stringify(thing)), (1 - ((1 - danger) * (1 - (land[y - 1][x] === 0 ? landData[realLand[y - 1][x]].difficulty : 0)))), time + (land[y - 1][x] === 0 ? landData[realLand[y - 1][x]].time : 0)]);
                 }
                 if (y + 1 < landLength && !visited[y + 1][x]) {
-                    bfs.push([y + 1, x, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y + 1][x] === 0 ? landData[realLand[y + 1][x]].difficulty : 0)))]);
+                    bfs.push([y + 1, x, JSON.parse(JSON.stringify(thing)), (1 - ((1 - danger) * (1 - (land[y + 1][x] === 0 ? landData[realLand[y + 1][x]].difficulty : 0)))), time + (land[y + 1][x] === 0 ? landData[realLand[y + 1][x]].time : 0)]);
                 }
                 if (x - 1 >= 0 && !visited[y][x - 1]) {
-                    bfs.push([y, x - 1, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y][x - 1] === 0 ? landData[realLand[y][x - 1]].difficulty : 0)))]);
+                    bfs.push([y, x - 1, JSON.parse(JSON.stringify(thing)), (1 - ((1 - danger) * (1 - (land[y][x - 1] === 0 ? landData[realLand[y][x - 1]].difficulty : 0)))), time + (land[y][x - 1] === 0 ? landData[realLand[y][x - 1]].time : 0)]);
                 }
                 if (x + 1 < landLength && !visited[y][x + 1]) {
-                    bfs.push([y, x + 1, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y][x + 1] === 0 ? landData[realLand[y][x + 1]].difficulty : 0)))]);
+                    bfs.push([y, x + 1, JSON.parse(JSON.stringify(thing)), (1 - ((1 - danger) * (1 - (land[y][x + 1] === 0 ? landData[realLand[y][x + 1]].difficulty : 0)))), time + (land[y][x + 1] === 0 ? landData[realLand[y][x + 1]].time : 0)]);
                 }
             }
         };

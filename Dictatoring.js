@@ -1,3 +1,105 @@
+class PriorityQueue {
+    constructor({comparator = (a, b) => a - b, initialValues = []} = {}) {
+        this.comparator = comparator;
+        this.data = initialValues;
+        this.heapify();
+    }
+
+    peek() {
+        if (this.size() === 0) {
+            return null;
+        }
+
+        return this.data[0];
+    }
+
+    push(value) {
+        this.data.push(value);
+        this.bubbleUp(this.data.length - 1);
+    }
+
+    poll() {
+        if (this.size() === 0) {
+            return null;
+        }
+
+        const result = this.data[0];
+        const last = this.data.pop();
+
+        if (this.data.length > 0) {
+            this.data[0] = last;
+            this.bubbleDown(0);
+        }
+
+        return result;
+    }
+
+    clear() {
+        this.data = [];
+    }
+
+    size() {
+        return this.data.length;
+    }
+
+    isEmpty() {
+        return this.data.length === 0;
+    }
+
+    toArray() {
+        return this.data.slice(0).sort(this.comparator);
+    }
+
+    heapify() {
+        if (this.data.length > 0) {
+            for (let i = 1; i < this.data.length; i++) {
+                this.bubbleUp(i);
+            }
+        }
+    }
+
+    bubbleUp(pos) {
+        while (pos > 0) {
+            let parent = (pos - 1) >>> 1;
+
+            if (this.comparator(this.data[pos], this.data[parent]) < 0) {
+                const temp = this.data[parent];
+                this.data[parent] = this.data[pos];
+                this.data[pos] = temp;
+                pos = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    bubbleDown(pos) {
+        const last = this.data.length - 1;
+
+        while (true) {
+            let left = (pos << 1) + 1;
+            let right = left + 1;
+            let minIndex = pos;
+
+            if (left <= last && this.comparator(this.data[left], this.data[minIndex]) < 0) {
+                minIndex = left;
+            }
+
+            if (right <= last && this.comparator(this.data[right], this.data[minIndex]) < 0) {
+                minIndex = right;
+            }
+
+            if (minIndex !== pos) {
+                const temp = this.data[minIndex];
+                this.data[minIndex] = this.data[pos];
+                this.data[pos] = temp;
+                pos = minIndex;
+            } else {
+                break;
+            }
+        }
+    }
+}
 const ask = document.getElementById("ask");
 const question = document.getElementById("question");
 const daycounter = document.getElementById("day-counter");
@@ -14,7 +116,9 @@ const waterPerDayText = document.getElementById("waterperday");
 const menus = document.getElementsByClassName("menu");
 const powerPerDayText = document.getElementById("powerperday");
 const landDisplay = document.getElementById("landDisplay");
-const landLength = 101;
+const explorersDisplay = document.getElementById("explorers");
+const landLength = 51;
+let explorers = 0;
 let money = 3000000000;
 let birthrate = 0.00002082191;
 let name, place;
@@ -32,6 +136,7 @@ let averageWages = 68815.9090909091/365;
 let averageMoney = 114457.142857143;
 let averageExpenses = 164.55;
 let land = [];
+let realLand = [];
 let landColors = {
     0: "fill: rgb(0, 0, 0)", //Undiscovered
     1: "fill: rgb(51, 204, 51)", //Grassland
@@ -49,14 +154,32 @@ let landColors = {
     13: "fill: rgb(204, 255, 255)", //Taiga
     14: "fill: rgb(51, 204, 51)" //Forest
 };
-
+let landData = {
+    0: {time: undefined, difficulty: undefined},
+    1: {time: 0.5, difficulty: 0.00001},
+    2: {time: 4, difficulty: 0.1},
+    3: {time: 2, difficulty: 0.03},
+    4: {time: 2, difficulty: 0.03},
+    5: {time: 1, difficulty: 0.00001},
+    6: {time: 2, difficulty: 0.4},
+    7: {time: 4, difficulty: 0.2},
+    8: {time: 0.5, difficulty: 0.00001},
+    9: {time: 6, difficulty: 0.01},
+    10: {time: 3, difficulty: 0.05},
+    11: {time: 4, difficulty: 0.05},
+    12: {time: 3, difficulty: 0.00002},
+    13: {time: 4, difficulty: 0.15},
+    14: {time: 0.5, difficulty: 0.00001}
+};
 for (let i = 0; i < landLength; i++) {
     land.push([]);
+    realLand.push([]);
 }
 
 for (let i = 0; i < landLength; i++) {
     for (let j = 0; j < landLength; j++) {
         land[i].push(0);
+        realLand[i].push(Math.floor(Math.random() * 14) + 1)
     }
 }
 
@@ -70,11 +193,81 @@ for (let i = 0; i < landLength; i++) {
         rect.setAttributeNS(null, 'y', i * 1010 / landLength);
         rect.setAttributeNS(null, 'height', '' + 1010 / landLength);
         rect.setAttributeNS(null, 'width', '' + 1010 / landLength);
+        rect.onclick = function () {
+            let x = confirm("Do you want to launch an expedition?");
+            if (!x) {
+                log("what");
+                return;
+            }
+            log("ok let's start");
+            explorers++;
+            explorersDisplay.textContent = explorers;
+            let bfs = new PriorityQueue({comparator: (a, b) => a[3] - b[3]});
+            let visited = land.map((x) => new Array(x.length).fill(false));
+            bfs.push([Math.ceil(landLength / 2), Math.ceil(landLength / 2), [], 0]);
+            log(bfs.size());
+            while (bfs.size() > 0) {
+                let state = bfs.poll();
+                let y = state[0];
+                let x = state[1];
+                let exploredLands = state[2];
+                let danger = state[3];
+                if (visited[y][x]) {
+                    continue;
+                }
+                let thing = JSON.parse(JSON.stringify(exploredLands));
+                thing.push([y, x]);
+                visited[y][x] = true;
+                log(x + " " + y + " " + danger + " " + exploredLands.toString());
+                if (y === i && x === j) {
+                    let k = 0;
+                    let time = 0;
+                    let dead = false;
+                    for (k = 0; k < thing.length; k++) {
+                        time += land[i][j] === 0 ? landData[realLand[thing[k][0]][thing[k][1]]].time : landData[realLand[thing[k][0]][thing[k][1]]].time / 4;
+                        if (land[i][j] === 0 && Math.random() < landData[realLand[thing[k][0]][thing[k][1]]].difficulty) {
+                            dead = true;
+                            break;
+                        }
+                    }
+                    log(time);
+                    if (dead) {
+                        setTimeout(function () {
+                            explorers--;
+                            population--;
+                            alert("Your explorer died. Sorry.")
+                        }, time * 1000)
+                    } else {
+                        setTimeout(function () {
+                            for (k = 0; k < thing.length; k++) {
+                                land[thing[k][0]][thing[k][1]] = realLand[thing[k][0]][thing[k][1]];
+                            }
+                            explorers--;
+                            alert("Your explorer discovered things!")
+                        }, time * 2 * 1000);
+                    }
+                    return;
+                }
+                if (y - 1 >= 0 && !visited[y - 1][x]) {
+                    bfs.push([y - 1, x, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y - 1][x] === 0 ? landData[realLand[y - 1][x]].difficulty : 0)))]);
+                }
+                if (y + 1 < landLength && !visited[y + 1][x]) {
+                    bfs.push([y + 1, x, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y + 1][x] === 0 ? landData[realLand[y + 1][x]].difficulty : 0)))]);
+                }
+                if (x - 1 >= 0 && !visited[y][x - 1]) {
+                    bfs.push([y, x - 1, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y][x - 1] === 0 ? landData[realLand[y][x - 1]].difficulty : 0)))]);
+                }
+                if (x + 1 < landLength && !visited[y][x + 1]) {
+                    bfs.push([y, x + 1, JSON.parse(JSON.stringify(thing)), 1 - ((1 - danger) * (1 - (land[y][x + 1] === 0 ? landData[realLand[y][x + 1]].difficulty : 0)))]);
+                }
+            }
+        };
         landDisplay.appendChild(rect)
     }
 }
 
 land[Math.ceil(landLength / 2)][Math.ceil(landLength / 2)] = 1;
+realLand[Math.ceil(landLength / 2)][Math.ceil(landLength / 2)] = 1;
 
 let log = function (X) {
     console.log(X);
@@ -104,6 +297,9 @@ function getCookie(cname) {
     }
     return "";
 }
+
+window.onunload = function () {
+};
 
 // clearCookie();
 

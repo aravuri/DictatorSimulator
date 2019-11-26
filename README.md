@@ -1,2 +1,2 @@
 # DictatorSimulator
-It's a dictator simulator. Go to aravuri.github.io/DictatorSimulator.
+It's a dictator simulator. Go to https://aravuri.github.io/DictatorSimulator.

@@ -116,7 +116,7 @@ function careful(a, b) {
 }
 const ask = document.getElementById("ask");
 const question = document.getElementById("question");
-const daycounter = document.getElementById("day-counter");
+const dayCounter = document.getElementById("day-counter");
 const answer = document.getElementById("answer");
 const submit = document.getElementById("submit");
 const navbar = document.getElementById("navbar");
@@ -132,6 +132,7 @@ const powerPerDayText = document.getElementById("powerperday");
 const landDisplay = document.getElementById("landDisplay");
 const explorersDisplay = document.getElementById("explorers");
 const landLength = 51;
+const powerProducers = document.querySelectorAll(".powerProduce");
 let explorers = 0;
 let money = 3000000000;
 let birthrate = 0.00002082191;
@@ -146,7 +147,8 @@ let pollution = 0;
 let currmenu = menus[0];
 let powerPerDay = 0;
 let waterPerDay = 0;
-let averageWages = 68815.9090909091/365;
+let foodPerDay = 0;
+let averageWages = 68815.9090909091 / 365;
 let averageMoney = 114457.142857143;
 let averageExpenses = 164.55;
 let land = [];
@@ -303,6 +305,14 @@ for (let i = 0; i < landLength; i++) {
     }
 }
 
+for (let i = 0; i < powerProducers.length; i++) {
+    powerProducers[i].querySelector(".buy").onclick = function () {
+        let nums = powerProducers[i].querySelector(".nums");
+        nums.textContent = "" + (parseInt(nums.textContent) + 1);
+    }
+}
+
+
 land[Math.ceil(landLength / 2)][Math.ceil(landLength / 2)] = 1;
 realLand[Math.ceil(landLength / 2)][Math.ceil(landLength / 2)] = 1;
 
@@ -336,6 +346,10 @@ function getCookie(cname) {
 }
 
 window.onunload = function () {
+    document.cookie = "money=" + money;
+    document.cookie = "taxes=" + taxes;
+    document.cookie = "land=" + JSON.stringify(land);
+    document.cookie = "realLand=" + JSON.stringify(land);
 };
 
 // clearCookie();
@@ -465,6 +479,16 @@ function update() {  // Assuming that each update is a day
 
     pps = Math.floor(population * birthrate * rand(0.875, 1.125));
 
+    powerPerDay = 0;
+    for (let i = 0; i < powerProducers.length; i++) {
+        powerPerDay += parseInt(powerProducers[i].querySelector(".nums").textContent) *
+            unshrinkify(powerProducers[i].querySelector(".amount").textContent);
+        pollution += parseInt(powerProducers[i].querySelector(".nums").textContent) *
+            unshrinkify(powerProducers[i].querySelector(".pollute").textContent);
+        mps -= parseInt(powerProducers[i].querySelector(".nums").textContent) *
+            unshrinkify(powerProducers[i].querySelector(".maintain").textContent)
+    }
+
     money += mps;
     population += pps;
     moneyText.textContent = shrinkify(money);
@@ -479,5 +503,5 @@ function update() {  // Assuming that each update is a day
     }
 
     days++;
-    daycounter.textContent = days;
+    dayCounter.textContent = days;
 }

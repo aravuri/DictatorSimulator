@@ -43,6 +43,7 @@
                 <div class="col center-contents">
                     <h4 id="populationDisplay">Population: <span id="population"></span></h4>
                 </div>
+                <h4>Pollution: <span id="pollution"></span></h4>
             </div>
             <input class="custom-range" id="taxes" max="100" min="0" type="range" value="0">
         </div>
@@ -51,16 +52,19 @@
             <div id="WaterBuy">
                 <h4>Water per Day: <span id="waterperday"></span></h4>
                 <h4>Total Water Storage: <span id="maxwater"></span></h4>
+                <div>
+                    <div id="waterBar"></div>
+                </div>
                 <div class="waterStore">
                     <button class="buy water">Water Tower</button>
-                    <br>$<span class="price">35K</span><br>How Many: <span class="nums">0</span>
-                    <br> Maintenance Costs: $<span class="maintain">2.5K</span>
-                    <br> <span>Energy Production: <span class="amount">24K</span> kWh</span>
-                    <br> <span>Pollution: <span class="pollute">21.6K</span> Tons</span>
-                    <br> <span class="description">Really bad for the environment, but hey, it's cheap, and you can't argue with that! ... Right?</span>
+                    <br>$<span class="price">3.6M</span><br>How Many: <span class="nums">0</span>
+                    <br> Maintenance Costs: $<span class="maintain">0</span>
+                    <br> <span>Water Storage: <span class="amount">1M</span> Gallons</span>
+                    <br> <span>Pollution: <span class="pollute">0</span> Tons</span>
+                    <br> <span class="description">Hold your water? Water Tower</span>
                     <br>
                     <img class="limit-img"
-                         src="https://static.seattletimes.com/wp-content/uploads/2018/08/11a6f380-a5a8-11e8-b774-4d3c2100fc7e-780x541.jpg">
+                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Ross_Barnett_Reservoir_water_tower.jpg/220px-Ross_Barnett_Reservoir_water_tower.jpg">
                 </div>
             </div>
             <div class="hidden" id="ElectricityBuy">

@@ -3,6 +3,14 @@
     display: none;
 }
 
+.authors {
+    border-radius: 1rem;
+    background-color: lightskyblue;
+    padding: 1rem;
+    margin: 5rem 1rem 1rem;
+
+}
+
 .nav-wrapper {
     display: flex;
     width: 100%;
@@ -35,6 +43,15 @@
     background-color: lightskyblue;
 }
 
+.limit-height {
+    height: 15rem !important;
+}
+
+.limit-img {
+    width: 5rem;
+    height: 5rem;
+}
+
 .pad-left {
     padding-left: 2rem;
 }
@@ -45,6 +62,20 @@
     background-size: cover; /* <------ */
     background-repeat: no-repeat;
     /*background-position: center center;              !* optional, center the image *!*/
+}
+
+.powerProduce {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: darkgrey;
+}
+
+.waterStore {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: darkgrey;
 }
 
 .title-div {

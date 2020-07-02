@@ -140,10 +140,10 @@ const waterStorages = document.querySelectorAll(".waterStore");
 const waterProducers = document.querySelectorAll(".waterGet");
 const pollutionText = document.querySelector("#pollution");
 let explorers = 0;
-let money = 3000000;
+let money = 10000000;
 let birthrate = 0.00002082191;
 let name, place;
-let population = 1000000;
+let population = 100;
 let taxes = 0;
 let days = 0;
 let pps = 0;
@@ -157,6 +157,8 @@ let waterPerDay = 0;
 let water = 0;
 let maxWater = 0;
 let foodPerDay = 0;
+let powerQuota = 7.5;
+let waterQuota = 0.845351;
 let averageWages = 68815.9090909091 / 365;
 let averageMoney = 114457.142857143;
 let averageExpenses = 164.55;
@@ -498,11 +500,9 @@ function update() {  // Assuming that each update is a day
     averageMoney -= change;
     averageMoney = Math.max(0, averageMoney);
 
-    pps = Math.floor(population * birthrate * rand(0.875, 1.125));
-
     powerPerDay = 0;
     maxWater = 0;
-    waterPerDay = 0;
+    waterPerDay = -population * waterQuota;
     for (let i = 0; i < powerProducers.length; i++) {
         powerPerDay += parseInt(powerProducers[i].querySelector(".nums").textContent) *
             unshrinkify(powerProducers[i].querySelector(".amount").textContent);
@@ -529,11 +529,15 @@ function update() {  // Assuming that each update is a day
     }
 
     money += mps;
-    population += pps;
     water += waterPerDay;
     water = Math.min(water, maxWater);
     water = Math.max(water, 0);
-    happiness = 100 - taxes;
+    console.log(powerQuota * population);
+    happiness = (Math.min(powerPerDay, powerQuota * population) / (powerQuota * population) + (100 - taxes) / 100) / 2 * 100;
+
+    pps = Math.ceil(population * birthrate * rand(0.875, 1.125));
+    population += pps;
+
     moneyText.textContent = shrinkify(money);
     populationText.textContent = shrinkify(population);
     powerPerDayText.textContent = shrinkify(powerPerDay);

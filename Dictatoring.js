@@ -123,10 +123,13 @@ const navbar = document.getElementById("navbar");
 const buyMenu = document.getElementById("buymenu");
 const dictatorMenu = document.getElementById("dictatorMenu");
 const moneyText = document.getElementById("money");
+const happinessText = document.getElementById("happiness");
 const populationText = document.getElementById("population");
 const taxValue = document.getElementById("taxValue");
 const taxSlider = document.getElementById("taxes");
 const waterPerDayText = document.getElementById("waterperday");
+const maxWaterText = document.getElementById("maxwater");
+const currentWaterText = document.getElementById("currentwater");
 const menus = document.getElementsByClassName("menu");
 const powerPerDayText = document.getElementById("powerperday");
 const landDisplay = document.getElementById("landDisplay");
@@ -134,6 +137,7 @@ const explorersDisplay = document.getElementById("explorers");
 const landLength = 51;
 const powerProducers = document.querySelectorAll(".powerProduce");
 const waterStorages = document.querySelectorAll(".waterStore");
+const waterProducers = document.querySelectorAll(".waterGet");
 const pollutionText = document.querySelector("#pollution");
 let explorers = 0;
 let money = 3000000;
@@ -144,6 +148,7 @@ let taxes = 0;
 let days = 0;
 let pps = 0;
 let mps = 0;
+let happiness = 0;
 let temperature = 22; //Imperial Scum.
 let pollution = 0;
 let currmenu = menus[0];
@@ -315,7 +320,18 @@ for (let i = 0; i < powerProducers.length; i++) {
         nums.textContent = "" + (parseInt(nums.textContent) + 1);
     }
 }
-
+for (let i = 0; i < waterStorages.length; i++) {
+    waterStorages[i].querySelector(".buy").onclick = function () {
+        let nums = waterStorages[i].querySelector(".nums");
+        nums.textContent = "" + (parseInt(nums.textContent) + 1);
+    }
+}
+for (let i = 0; i < waterProducers.length; i++) {
+    waterProducers[i].querySelector(".buy").onclick = function () {
+        let nums = waterProducers[i].querySelector(".nums");
+        nums.textContent = "" + (parseInt(nums.textContent) + 1);
+    }
+}
 
 land[Math.ceil(landLength / 2)][Math.ceil(landLength / 2)] = 1;
 realLand[Math.ceil(landLength / 2)][Math.ceil(landLength / 2)] = 1;
@@ -486,6 +502,7 @@ function update() {  // Assuming that each update is a day
 
     powerPerDay = 0;
     maxWater = 0;
+    waterPerDay = 0;
     for (let i = 0; i < powerProducers.length; i++) {
         powerPerDay += parseInt(powerProducers[i].querySelector(".nums").textContent) *
             unshrinkify(powerProducers[i].querySelector(".amount").textContent);
@@ -495,21 +512,36 @@ function update() {  // Assuming that each update is a day
             unshrinkify(powerProducers[i].querySelector(".maintain").textContent)
     }
     for (let i = 0; i < waterStorages.length; i++) {
-        maxWater += parseInt(powerProducers[i].querySelector(".nums").textContent) *
-            unshrinkify(powerProducers[i].querySelector(".amount").textContent);
-        pollution += parseInt(powerProducers[i].querySelector(".nums").textContent) *
-            unshrinkify(powerProducers[i].querySelector(".pollute").textContent);
-        mps -= parseInt(powerProducers[i].querySelector(".nums").textContent) *
-            unshrinkify(powerProducers[i].querySelector(".maintain").textContent)
+        maxWater += parseInt(waterStorages[i].querySelector(".nums").textContent) *
+            unshrinkify(waterStorages[i].querySelector(".amount").textContent);
+        pollution += parseInt(waterStorages[i].querySelector(".nums").textContent) *
+            unshrinkify(waterStorages[i].querySelector(".pollute").textContent);
+        mps -= parseInt(waterStorages[i].querySelector(".nums").textContent) *
+            unshrinkify(waterStorages[i].querySelector(".maintain").textContent)
+    }
+    for (let i = 0; i < waterProducers.length; i++) {
+        waterPerDay += parseInt(waterProducers[i].querySelector(".nums").textContent) *
+            unshrinkify(waterProducers[i].querySelector(".amount").textContent);
+        pollution += parseInt(waterProducers[i].querySelector(".nums").textContent) *
+            unshrinkify(waterProducers[i].querySelector(".pollute").textContent);
+        mps -= parseInt(waterProducers[i].querySelector(".nums").textContent) *
+            unshrinkify(waterProducers[i].querySelector(".maintain").textContent)
     }
 
     money += mps;
     population += pps;
+    water += waterPerDay;
+    water = Math.min(water, maxWater);
+    water = Math.max(water, 0);
+    happiness = 100 - taxes;
     moneyText.textContent = shrinkify(money);
     populationText.textContent = shrinkify(population);
     powerPerDayText.textContent = shrinkify(powerPerDay);
     waterPerDayText.textContent = shrinkify(waterPerDay);
+    maxWaterText.textContent = shrinkify(maxWater);
+    currentWaterText.textContent = shrinkify(water);
     pollutionText.textContent = shrinkify(pollution);
+    happinessText.textContent = shrinkify(happiness);
 
     for (let i = 0; i < landLength; i++) {
         for (let j = 0; j < landLength; j++) {

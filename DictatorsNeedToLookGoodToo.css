@@ -78,6 +78,14 @@
     background-color: lightseagreen;
 }
 
+.waterGet {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: lightseagreen;
+}
+
+
 .title-div {
     margin: auto;
     margin-top: 2.5rem;

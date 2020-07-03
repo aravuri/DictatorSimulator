@@ -140,7 +140,7 @@ const waterStorages = document.querySelectorAll(".waterStore");
 const waterProducers = document.querySelectorAll(".waterGet");
 const pollutionText = document.querySelector("#pollution");
 let explorers = 0;
-let money = 10000000;
+var money = 10000000;
 let birthrate = 0.00002082191;
 let name, place;
 let population = 100;
@@ -318,20 +318,32 @@ for (let i = 0; i < landLength; i++) {
 
 for (let i = 0; i < powerProducers.length; i++) {
     powerProducers[i].querySelector(".buy").onclick = function () {
-        let nums = powerProducers[i].querySelector(".nums");
-        nums.textContent = "" + (parseInt(nums.textContent) + 1);
+        let price = unshrinkify(powerProducers[i].querySelector(".price").textContent);
+        if (money > price) {
+            let nums = powerProducers[i].querySelector(".nums");
+            money -= price;
+            nums.textContent = "" + (parseInt(nums.textContent) + 1);
+        }
     }
 }
 for (let i = 0; i < waterStorages.length; i++) {
     waterStorages[i].querySelector(".buy").onclick = function () {
-        let nums = waterStorages[i].querySelector(".nums");
-        nums.textContent = "" + (parseInt(nums.textContent) + 1);
+        let price = unshrinkify(waterStorages[i].querySelector(".price").textContent);
+        if (money > price) {
+            let nums = waterStorages[i].querySelector(".nums");
+            money -= unshrinkify(waterStorages[i].querySelector(".price").textContent);
+            nums.textContent = "" + (parseInt(nums.textContent) + 1);
+        }
     }
 }
 for (let i = 0; i < waterProducers.length; i++) {
     waterProducers[i].querySelector(".buy").onclick = function () {
-        let nums = waterProducers[i].querySelector(".nums");
-        nums.textContent = "" + (parseInt(nums.textContent) + 1);
+        let price = unshrinkify(waterProducers[i].querySelector(".price").textContent);
+        if (money > price) {
+            let nums = waterProducers[i].querySelector(".nums");
+            money -= price;
+            nums.textContent = "" + (parseInt(nums.textContent) + 1);
+        }
     }
 }
 

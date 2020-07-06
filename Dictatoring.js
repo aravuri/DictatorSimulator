@@ -5,10 +5,20 @@ function startGame() {
     navbar.classList.remove("hidden");
     buyMenu.classList.remove("hidden");
     dictatorMenu.classList.remove("hidden");
+    gameStartButton.classList.remove("hidden");
     pollutionText.textContent = shrinkify(pollution);
+    gameStartButton.addEventListener('click', function () {
+        realStartGame();
+    });
+}
+
+function realStartGame() {
+    gameStartButton.classList.add("hidden");
     update();
     setInterval(update, 1000);
 }
+
+clearCookie();
 
 if (getCookie("name").length === 0) {
     askName();

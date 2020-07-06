@@ -22,6 +22,7 @@ const waterProducers = document.querySelectorAll(".waterGet");
 const pollutionText = document.querySelector("#pollution");
 const landDisplay = document.getElementById("landDisplay");
 const explorersDisplay = document.getElementById("explorers");
+const gameStartButton = document.getElementById("gamestart");
 const landLength = 51;
 var money = 10000000;
 var birthrate = 0.00002082191;

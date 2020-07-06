@@ -103,7 +103,7 @@ function realStartGame() {
     setInterval(update, 1000);
 }
 
-clearCookie();
+// clearCookie();
 
 if (getCookie("name").length === 0) {
     askName();

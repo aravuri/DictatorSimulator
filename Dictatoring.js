@@ -9,6 +9,7 @@ function startGame() {
     dictatorMenu.classList.remove("hidden");
     gameStartButton.classList.remove("hidden");
     pollutionText.textContent = shrinkify(pollution);
+    beforeUpdate();
     prestart = setInterval(beforeUpdate, 1000);
     gameStartButton.addEventListener('click', function () {
         realStartGame();

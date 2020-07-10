@@ -214,10 +214,12 @@ function update() {  // Assuming that each update is a day
     water += waterPerDay;
 
     happiness = (Math.min(powerPerDay, powerQuota * population) / (powerQuota * population) + (100 - taxes) / 100) / 2 * 100;
-    pps = Math.ceil(population * birthrate * rand(0.875, 1.125));
-    if (water < -population * waterNeeded) {
-        pps -= (population - water / (population * waterNeeded)) * 0.30;
+    pps = population * birthrate * rand(0.875, 1.125);
+    console.log("Now: " + pps);
+    if (water < population * waterNeeded) {
+        pps -= (population - water / (population * waterNeeded)) * 0.3;
     }
+    pps = Math.ceil(pps);
     water = Math.min(water, maxWater);
     population += pps;
 

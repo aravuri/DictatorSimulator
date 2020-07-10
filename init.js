@@ -27,7 +27,7 @@ const landLength = 51;
 var money = 10000000;
 var birthrate = 0.00002082191;
 var name, place;
-var population = 100;
+var population = 1000;
 var taxes = 0;
 var days = 0;
 var pps = 0;

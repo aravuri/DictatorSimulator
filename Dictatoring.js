@@ -159,7 +159,7 @@ function beforeUpdate() {
     moneyText.textContent = shrinkify(money);
     populationText.textContent = shrinkify(population);
     powerPerDayText.textContent = shrinkify(powerPerDay);
-    waterPerDayText.textContent = shrinkify(waterPerDay);
+    waterPerDayText.textContent = shrinkify(waterPerDay - population * waterNeeded);
     maxWaterText.textContent = shrinkify(maxWater);
     currentWaterText.textContent = shrinkify(water);
     pollutionText.textContent = shrinkify(pollution);
@@ -226,7 +226,7 @@ function update() {  // Assuming that each update is a day
     moneyText.textContent = shrinkify(money);
     populationText.textContent = shrinkify(population);
     powerPerDayText.textContent = shrinkify(powerPerDay);
-    waterPerDayText.textContent = shrinkify(waterPerDay);
+    waterPerDayText.textContent = shrinkify(waterPerDay - population * waterNeeded);
     maxWaterText.textContent = shrinkify(maxWater);
     currentWaterText.textContent = shrinkify(water);
     pollutionText.textContent = shrinkify(pollution);

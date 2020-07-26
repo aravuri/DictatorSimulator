@@ -154,12 +154,12 @@ function beforeUpdate() {
             unshrinkify(waterProducers[i].querySelector(".maintain").textContent)
     }
 
-    happiness = (Math.min(powerPerDay, powerQuota * population) / (powerQuota * population) + (100 - taxes) / 100) / 2 * 100;
+    happiness = (Math.min(powerPerDay, powerQuota * powerConsumptionMultiplier * population) / (powerQuota * powerConsumptionMultiplier * population) + (100 - taxes) / 100) / 2 * 100;
 
     moneyText.textContent = shrinkify(money);
     populationText.textContent = shrinkify(population);
     powerPerDayText.textContent = shrinkify(powerPerDay);
-    waterPerDayText.textContent = shrinkify(waterPerDay - population * waterNeeded);
+    waterPerDayText.textContent = shrinkify(waterPerDay - population * waterNeeded * waterConsumptionMultiplier);
     maxWaterText.textContent = shrinkify(maxWater);
     currentWaterText.textContent = shrinkify(water);
     pollutionText.textContent = shrinkify(pollution);
@@ -213,11 +213,11 @@ function update() {  // Assuming that each update is a day
     money += mps;
     water += waterPerDay;
 
-    happiness = (Math.min(powerPerDay, powerQuota * population) / (powerQuota * population) + (100 - taxes) / 100) / 2 * 100;
-    pps = population * birthrate * rand(0.875, 1.125);
-    console.log("Now: " + pps);
-    if (water < population * waterNeeded) {
-        pps -= (population - water / (population * waterNeeded)) * 0.3;
+    happiness = (Math.min(powerPerDay, powerQuota * powerConsumptionMultiplier * population) / (powerQuota * powerConsumptionMultiplier * population) + (100 - taxes) / 100) / 2 * 100;
+    pps = population * birthrate * birthRateMultiplier * rand(0.875, 1.125);
+    log(powerConsumptionMultiplier);
+    if (water < population * waterNeeded * waterConsumptionMultiplier) {
+        pps -= (population - water / (population * waterNeeded * waterConsumptionMultiplier)) * 0.3;
     }
     pps = Math.ceil(pps);
     water = Math.min(water, maxWater);
@@ -226,7 +226,7 @@ function update() {  // Assuming that each update is a day
     moneyText.textContent = shrinkify(money);
     populationText.textContent = shrinkify(population);
     powerPerDayText.textContent = shrinkify(powerPerDay);
-    waterPerDayText.textContent = shrinkify(waterPerDay - population * waterNeeded);
+    waterPerDayText.textContent = shrinkify(waterPerDay - population * waterNeeded * waterConsumptionMultiplier);
     maxWaterText.textContent = shrinkify(maxWater);
     currentWaterText.textContent = shrinkify(water);
     pollutionText.textContent = shrinkify(pollution);

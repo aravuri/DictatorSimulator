@@ -23,8 +23,15 @@ const pollutionText = document.querySelector("#pollution");
 const landDisplay = document.getElementById("landDisplay");
 const explorersDisplay = document.getElementById("explorers");
 const gameStartButton = document.getElementById("gamestart");
+const birthRateValue = document.getElementById("birthRateVal");
+const birthRateSlider = document.getElementById("birthRate");
+const waterConsumptionValue = document.getElementById("waterConsumptionVal");
+const waterConsumptionSlider = document.getElementById("waterConsumption");
+const powerConsumptionValue = document.getElementById("powerConsumptionVal");
+const powerConsumptionSlider = document.getElementById("powerConsumption");
 const landLength = 51;
 var money = 10000000;
+var birthRateMultiplier = 1;
 var birthrate = 0.00002082191;
 var name, place;
 var population = 1000;
@@ -40,7 +47,9 @@ var powerPerDay = 0;
 var waterPerDay = 0;
 var water = 0;
 var maxWater = 0;
+var powerConsumptionMultiplier = 1;
 var powerQuota = 7.5;
+var waterConsumptionMultiplier = 1;
 var waterWanted = 90;
 var waterNeeded = 0.845351;
 var averageWages = 68815.9090909091 / 365;
@@ -215,6 +224,21 @@ let shrinkify = function (x) {
 taxSlider.oninput = function () {
     taxes = this.value;
     taxValue.textContent = taxes;
+};
+
+birthRateSlider.oninput = function () {
+    birthRateMultiplier = this.value / 100;
+    birthRateValue.textContent = Math.round(birthRateMultiplier * 100);
+};
+
+waterConsumptionSlider.oninput = function () {
+    waterConsumptionMultiplier = this.value / 100;
+    waterConsumptionValue.textContent = Math.round(waterConsumptionMultiplier * 100);
+};
+
+powerConsumptionSlider.oninput = function () {
+    powerConsumptionMultiplier = this.value / 100;
+    powerConsumptionValue.textContent = Math.round(powerConsumptionMultiplier * 100);
 };
 
 

@@ -29,6 +29,7 @@ const waterConsumptionValue = document.getElementById("waterConsumptionVal");
 const waterConsumptionSlider = document.getElementById("waterConsumption");
 const powerConsumptionValue = document.getElementById("powerConsumptionVal");
 const powerConsumptionSlider = document.getElementById("powerConsumption");
+const buyButtons = document.getElementsByClassName("buy");
 const landLength = 51;
 var money = 10000000;
 var birthRateMultiplier = 1;

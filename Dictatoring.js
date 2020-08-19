@@ -1,5 +1,19 @@
-let prestart;
+document.onkeydown = function (e) {
+    if (e.key === 'Shift') {
+        for (let i = 0; i < buyButtons.length; i++) {
+            buyButtons[i].style.backgroundColor = "red";
+        }
+    }
+}
+document.onkeyup = function (e) {
+    if (e.key === 'Shift') {
+        for (let i = 0; i < buyButtons.length; i++) {
+            buyButtons[i].style.backgroundColor = "white";
+        }
+    }
+}
 
+let prestart;
 function startGame() {
     taxSlider.value = 16;
     taxes = taxSlider.value;

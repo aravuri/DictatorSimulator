@@ -2,6 +2,7 @@ document.onkeydown = function (e) {
     if (e.key === 'Shift') {
         for (let i = 0; i < buyButtons.length; i++) {
             buyButtons[i].style.backgroundColor = "red";
+            buyMultiplier = 10;
         }
     }
 }
@@ -9,6 +10,7 @@ document.onkeyup = function (e) {
     if (e.key === 'Shift') {
         for (let i = 0; i < buyButtons.length; i++) {
             buyButtons[i].style.backgroundColor = "white";
+            buyMultiplier = 1;
         }
     }
 }

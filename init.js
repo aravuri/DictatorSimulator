@@ -32,6 +32,7 @@ const powerConsumptionSlider = document.getElementById("powerConsumption");
 const buyButtons = document.getElementsByClassName("buy");
 const landLength = 51;
 var money = 10000000;
+var buyMultiplier = 1;
 var birthRateMultiplier = 1;
 var birthrate = 0.00002082191;
 var name, place;
@@ -154,31 +155,31 @@ for (let i = 0; i < landLength; i++) {
 
 for (let i = 0; i < powerProducers.length; i++) {
     powerProducers[i].querySelector(".buy").onclick = function () {
-        let price = unshrinkify(powerProducers[i].querySelector(".price").textContent);
+        let price = unshrinkify(powerProducers[i].querySelector(".price").textContent)*buyMultiplier;
         if (money > price) {
             let nums = powerProducers[i].querySelector(".nums");
             money -= price;
-            nums.textContent = "" + (parseInt(nums.textContent) + 1);
+            nums.textContent = "" + (parseInt(nums.textContent) + buyMultiplier);
         }
     }
 }
 for (let i = 0; i < waterStorages.length; i++) {
     waterStorages[i].querySelector(".buy").onclick = function () {
-        let price = unshrinkify(waterStorages[i].querySelector(".price").textContent);
+        let price = unshrinkify(waterStorages[i].querySelector(".price").textContent)*buyMultiplier;
         if (money > price) {
             let nums = waterStorages[i].querySelector(".nums");
             money -= unshrinkify(waterStorages[i].querySelector(".price").textContent);
-            nums.textContent = "" + (parseInt(nums.textContent) + 1);
+            nums.textContent = "" + (parseInt(nums.textContent) + buyMultiplier);
         }
     }
 }
 for (let i = 0; i < waterProducers.length; i++) {
     waterProducers[i].querySelector(".buy").onclick = function () {
-        let price = unshrinkify(waterProducers[i].querySelector(".price").textContent);
+        let price = unshrinkify(waterProducers[i].querySelector(".price").textContent)*buyMultiplier;
         if (money > price) {
             let nums = waterProducers[i].querySelector(".nums");
             money -= price;
-            nums.textContent = "" + (parseInt(nums.textContent) + 1);
+            nums.textContent = "" + (parseInt(nums.textContent) + buyMultiplier);
         }
     }
 }
